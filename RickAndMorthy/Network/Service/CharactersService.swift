@@ -43,3 +43,33 @@ class CharactersService: CharactersServiceType {
     }
 }
 
+class MockCharactersService: CharactersServiceType {
+    var session: URLSession = .shared
+    
+    var mockCharacters: [Character] = []
+    var mockCharacter: Character?
+    var error: APIError?
+    
+    func getCharacters(page: Int?) -> AnyPublisher<BaseResponse<[Character]>, APIError> {
+        if let error = error {
+            return Fail(error: error).eraseToAnyPublisher()
+        } else {
+            let response = BaseResponse(info: Info(count: mockCharacters.count, pages: 1, next: nil, prev: nil), results: mockCharacters)
+            return Just(response)
+                .setFailureType(to: APIError.self)
+                .eraseToAnyPublisher()
+        }
+    }
+
+    func getCharacter(id: Int) -> AnyPublisher<Character, APIError> {
+        if let error = error {
+            return Fail(error: error).eraseToAnyPublisher()
+        } else if let character = mockCharacter {
+            return Just(character)
+                .setFailureType(to: APIError.self)
+                .eraseToAnyPublisher()
+        } else {
+            return Fail(error: .invalidResponse).eraseToAnyPublisher()
+        }
+    }
+}

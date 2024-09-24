@@ -7,12 +7,11 @@
 import Combine
 import Foundation
 
-@MainActor
 class HomeViewModel: ObservableObject {
     @Published var characters: [Character] = []
     @Published var errorMessage: String?
     @Published var isLoading = false
-    private var currentPage = 1
+    private var nextPage = 1
 
     private var cancellables = Set<AnyCancellable>()
     private let charactersService: CharactersServiceType
@@ -35,7 +34,7 @@ class HomeViewModel: ObservableObject {
                 }
             }, receiveValue: { [weak self] response in
                 self?.characters.append(contentsOf: response.results)
-                self?.currentPage += 1
+                self?.nextPage += 1
             })
             .store(in: &cancellables)
     }
@@ -64,7 +63,7 @@ class HomeViewModel: ObservableObject {
     // Fetch the next page when needed
     func fetchNextPageIfNeeded(currentCharacter: Character) {
         if characters.last == currentCharacter {
-            fetchCharacters(page: currentPage)
+            fetchCharacters(page: nextPage)
         }
     }
 }
