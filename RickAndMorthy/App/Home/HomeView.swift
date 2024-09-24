@@ -10,6 +10,9 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var viewModel: HomeViewModel
+    @State private var selecetedCharacterImage: Image?
+    @State private var selecetedCharacter: Character?
+    @Namespace private var animationNamespace
     
     var body: some View {
         ZStack {
@@ -39,34 +42,99 @@ struct HomeView: View {
                 ProgressView()
                     .padding()
             }
+        }.overlay {
+            if let selecetedCharacterImage, let selecetedCharacter {
+                ZStack(alignment: .topTrailing) {
+                    Color.black.opacity(0.8)
+                        .ignoresSafeArea()
+                    
+                    VStack {
+                        Spacer()
+                        // Close button
+                        selecetedCharacterImage
+                            .resizable()
+                            .scaledToFit()
+                            .clipShape(RoundedRectangle(cornerRadius: 30))
+                            .matchedGeometryEffect(id: selecetedCharacter.id, in: animationNamespace)
+                            .onTapGesture {
+                                withAnimation(.bouncy) {
+                                    self.selecetedCharacterImage = nil
+                                    self.selecetedCharacter = nil
+                                }
+                            }
+                            .padding()
+                        
+                        Button(action: {
+                            withAnimation(.bouncy) {
+                                self.selecetedCharacterImage = nil
+                                self.selecetedCharacter = nil
+                            }
+                        }) {
+                            Image(systemName: "xmark.circle.fill")
+                                .resizable()
+                                .frame(width: 50, height: 50)
+                                .foregroundColor(.white)
+                                .padding()
+                        }
+                        Spacer()
+                    }
+                }
+            }
         }
-        
     }
 
     func characterView(_ character: Character) -> some View {
         HStack {
-            AsyncImage(url: URL(string: character.image)) { image in
-                image
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 140)
-            } placeholder: {
-                ProgressView()
-                    .frame(height: 140)
-                    .frame(width: 140)
+            if selecetedCharacter?.id != character.id {
+                AsyncImage(url: URL(string: character.image)) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(height: 160)
+                        .frame(width: 100)
+                        .matchedGeometryEffect(id: character.id, in: animationNamespace)
+                        .onTapGesture {
+                            withAnimation(.bouncy) {
+                                selecetedCharacterImage = image
+                                selecetedCharacter = character
+                            }
+                        }
+                } placeholder: {
+                    ProgressView()
+                        .frame(height: 160)
+                        .frame(width: 100)
+                }
+                .cornerRadius(30)
+                .shadow(radius: 5)
+            } else {
+                Spacer()
+                    .frame(height: 160)
+                    .frame(width: 100)
             }
-            .cornerRadius(30)
-            .shadow(radius: 5)
             Spacer()
                 .frame(width: 20)
-            VStack(alignment: .leading) {
-                Text(character.name)
-                    .font(.title2)
-                    .fontWeight(.bold)
-                Text("Species: \(character.species)")
-                Text("Status: \(character.status)")
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(character.name)
+                        .font(.title2)
+                        .fontWeight(.bold)
+                    Text("Species: \(character.species)")
+                    Text("Status: \(character.status)")
+                    Text("Origin: \(character.origin.name)")
+                    Text("Gender: \(character.gender)")
+                }
+                Spacer()
             }
-        }.padding()
+            .padding(.leading, 30)
+            .frame(height: 160)
+            .frame(maxWidth: .infinity)
+            .background(
+                RoundedRectangle(cornerRadius: 30)
+                    .fill(Color.white)
+                    .shadow(radius: 5)
+            )
+        }
+        .padding()
     }
 }
 

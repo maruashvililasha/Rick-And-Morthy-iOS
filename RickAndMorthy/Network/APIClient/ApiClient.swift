@@ -60,3 +60,7 @@ extension APIClient {
             .eraseToAnyPublisher()
     }
 }
+
+enum API {
+    // Here will go All ApiRoutes
+}

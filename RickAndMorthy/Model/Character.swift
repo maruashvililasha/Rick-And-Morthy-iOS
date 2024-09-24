@@ -7,20 +7,6 @@
 
 import Foundation
 
-// MARK: - CharactersResponse (Root)
-struct CharactersResponse: Decodable {
-    let info: Info
-    let results: [Character]
-}
-
-// MARK: - Info
-struct Info: Decodable {
-    let count: Int
-    let pages: Int
-    let next: String?
-    let prev: String?
-}
-
 // MARK: - Character
 struct Character: Decodable, Equatable {
     static func == (lhs: Character, rhs: Character) -> Bool {

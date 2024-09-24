@@ -52,6 +52,7 @@ enum ApiEnvironment {
     }
     
     var headers: [String: String] {
-        ["Authorization": "Bearer \(apiKey)"]
+//        ["Authorization": "Bearer \(apiKey)"]
+        [:]
     }
 }

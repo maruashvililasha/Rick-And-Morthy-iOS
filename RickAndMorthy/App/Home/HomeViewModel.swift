@@ -39,6 +39,27 @@ class HomeViewModel: ObservableObject {
             })
             .store(in: &cancellables)
     }
+    
+    func getImage(for characterId: Int) -> String? {
+        return characters.filter({$0.id == characterId}).first?.image
+    }
+    
+    func fetchCharacter(with id: Int) {
+        guard !isLoading else { return }
+        isLoading = true
+        
+        charactersService.getCharacter(id: id)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                self.isLoading = false
+                if case .failure(let error) = completion {
+                    self.errorMessage = error.localizedDescription
+                }
+            }, receiveValue: { [weak self] response in
+                dump(response)
+            })
+            .store(in: &cancellables)
+    }
 
     // Fetch the next page when needed
     func fetchNextPageIfNeeded(currentCharacter: Character) {

@@ -15,7 +15,7 @@ class ChatactersService: APIClient {
         self.session = session
     }
     
-    func getCharacters(page: Int?) -> AnyPublisher<CharactersResponse, APIError> {
+    func getCharacters(page: Int?) -> AnyPublisher<BaseResponse<[Character]>, APIError> {
         let route = API.Characters.getCharacters(page: page)
         let requestBuilder = RequestBuilder(route: route)
         

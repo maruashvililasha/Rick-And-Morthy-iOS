@@ -15,7 +15,7 @@ class EpisodesService: APIClient {
         self.session = session
     }
     
-    func getEpisodes(page: Int?) -> AnyPublisher<[Episode], APIError> {
+    func getEpisodes(page: Int?) -> AnyPublisher<BaseResponse<[Episode]>, APIError> {
         let route = API.Episodes.getEpisodes(page: page)
         let requestBuilder = RequestBuilder(route: route)
         
