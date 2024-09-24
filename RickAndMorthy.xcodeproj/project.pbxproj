@@ -75,10 +75,10 @@
 		4CDA1B372CA2A30600DAFAB1 = {
 			isa = PBXGroup;
 			children = (
+				4CDA1B412CA2A30600DAFAB1 /* Products */,
 				4CDA1B422CA2A30600DAFAB1 /* RickAndMorthy */,
 				4CDA1B532CA2A30800DAFAB1 /* RickAndMorthyTests */,
 				4CDA1B5D2CA2A30800DAFAB1 /* RickAndMorthyUITests */,
-				4CDA1B412CA2A30600DAFAB1 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -396,7 +396,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RickAndMorthy/Preview Content\"";
-				DEVELOPMENT_TEAM = 62Z47HCZ8F;
+				DEVELOPMENT_TEAM = F3AQCC2PGX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -425,7 +425,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RickAndMorthy/Preview Content\"";
-				DEVELOPMENT_TEAM = 62Z47HCZ8F;
+				DEVELOPMENT_TEAM = F3AQCC2PGX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
