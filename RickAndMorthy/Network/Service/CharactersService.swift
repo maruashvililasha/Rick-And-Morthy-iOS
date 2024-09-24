@@ -8,7 +8,12 @@
 import Combine
 import Foundation
 
-class ChatactersService: APIClient {
+protocol CharactersServiceType: APIClient {
+    func getCharacters(page: Int?) -> AnyPublisher<BaseResponse<[Character]>, APIError>
+    func getCharacter(id: Int) -> AnyPublisher<Character, APIError>
+}
+
+class CharactersService: CharactersServiceType {
     let session: URLSession
     
     init(session: URLSession = .shared) {

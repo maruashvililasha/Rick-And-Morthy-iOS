@@ -8,14 +8,18 @@
 import Combine
 import Foundation
 
-class LocationsService: APIClient {
+protocol LocationServiceType: APIClient {
+    func getLocations(page: Int?) -> AnyPublisher<BaseResponse<[Location]>, APIError>
+}
+
+class LocationsService: LocationServiceType {
     let session: URLSession
     
     init(session: URLSession = .shared) {
         self.session = session
     }
     
-    func getLocations(page: Int?) -> AnyPublisher<[Location], APIError> {
+    func getLocations(page: Int?) -> AnyPublisher<BaseResponse<[Location]>, APIError> {
         let route = API.Location.getLocations(page: page)
         let requestBuilder = RequestBuilder(route: route)
         

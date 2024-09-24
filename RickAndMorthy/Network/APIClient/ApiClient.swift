@@ -33,7 +33,7 @@ extension APIClient {
             .tryMap { data, response in
                 if ApiEnvironment.current.shouldPrintDebugLog, let httpResponse = response as? HTTPURLResponse {
                     print("✅ Response: \(httpResponse.statusCode) for \(request.url?.absoluteString ?? "")")
-                    let shouldPrintResponse = false
+                    let shouldPrintResponse = true
                     if let json = try? JSONSerialization.jsonObject(with: data, options: []), shouldPrintResponse {
                         print("📩 Response Body: \(json)")
                     }

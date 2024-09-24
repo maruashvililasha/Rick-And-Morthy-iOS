@@ -8,7 +8,12 @@
 import Foundation
 import Combine
 
-class EpisodesService: APIClient {
+protocol EpisodesServiceProtocol: APIClient {
+    func getEpisodes(page: Int?) -> AnyPublisher<BaseResponse<[Episode]>, APIError>
+    func getEpisode(id: Int) -> AnyPublisher<Episode, APIError>
+}
+
+class EpisodesService: EpisodesServiceProtocol {
     let session: URLSession
     
     init(session: URLSession = .shared) {

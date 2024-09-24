@@ -15,10 +15,10 @@ class HomeViewModel: ObservableObject {
     private var currentPage = 1
 
     private var cancellables = Set<AnyCancellable>()
-    private let charactersService: ChatactersService
+    private let charactersService: CharactersServiceType
     
 
-    init(characterService: ChatactersService = ChatactersService()) {
+    init(characterService: CharactersServiceType = CharactersService()) {
         self.charactersService = characterService
     }
 
