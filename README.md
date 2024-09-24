@@ -1,13 +1,35 @@
 # Rick and Morty iOS App
 
-This repository is created to demonstrate how to build an **API service** with **Combine** in **SwiftUI** and implement **MVVM** architecture. The app fetches data from the **Rick and Morty API** and displays it using smooth and elegant **animations**.
+This is an iOS app built using **SwiftUI**, following the **MVVM** architecture, and using **Combine** for handling asynchronous API requests to fetch data from the **Rick and Morty API**.
 
 ## Features
 
-- **API Service**: Handles API requests using `Combine` to fetch data from the [Rick and Morty API](https://rickandmortyapi.com/documentation).
-- **MVVM Architecture**: The app is structured using the Model-View-ViewModel (MVVM) design pattern.
-- **SwiftUI Animations**: Implements small, nice animations such as scaling images to fullscreen when tapped.
-- **Lazy Loading**: Fetches data page by page with infinite scrolling using a `LazyVStack`.
+- List of Rick and Morty characters, episodes, and locations.
+- Tap an image to see it fullscreen with smooth animations.
+- Infinite scrolling with lazy loading.
+- SwiftUI-based UI with Combine for API service.
+- **Unit tests** for API services (characters, episodes, and locations).
+
+## Unit Tests
+
+The project includes comprehensive unit tests for the API services, ensuring the correctness of the network layer and the data handling logic. Tests have been written for the following services:
+
+- **CharactersService**:
+  - Fetching a list of characters.
+  - Fetching a single character.
+  - Handling errors when fetching data.
+
+- **EpisodesService**:
+  - Fetching a list of episodes.
+  - Fetching a single episode.
+  - Handling errors when fetching data.
+
+- **LocationsService**:
+  - Fetching a list of locations.
+  - Handling errors when fetching data.
+
+The tests utilize **Combine** and **XCTest** with mock data responses and ensure that the network requests return the expected results, including success and failure scenarios.
+
 
 ## Project Structure
 
@@ -30,7 +52,6 @@ RickAndMortyApp/
   │       └── RequestBuilder.swift
   │       └── APIError.swift
   │   └── Routes/
-  │       ├── API.swift
   │       └── Characters.swift
   │       └── Episodes.swift
   │       └── Locations.swift
@@ -43,5 +64,7 @@ RickAndMortyApp/
   ├── Resourses/
   │   └── Assets.swift
   └── RickAndMorthyTests/
-    └── RickAndMorthyTests.swift
+    └── CharactersServiceTests.swift
+    └── EpisodesServiceTests.swift
+    └── LocationServiceTests.swift
 ```
